@@ -1,41 +1,25 @@
-//determine what happens once auth is finished
-
-var authenticationSuccess = function() {
-    console.log('Successful authentication');
-  };
-  
-  var authenticationFailure = function() {
-    console.log('Failed authentication');
-  };
-
-  //authorization and authentication
-
-  window.Trello.authorize({
-    type: 'popup',
-    name: 'Getting Started Application',
-    scope: {
-      read: 'true',
-      write: 'true' },
-    expiration: 'never',
-    success: authenticationSuccess,
-    error: authenticationFailure
-  });
-
-  //POST template
-
-var myList = '61f1d40a93852c1b9f88152a';
-
-var creationSuccess = function (data) {
-  console.log('Card created successfully.');
-  console.log(JSON.stringify(data, null, 2));
-};
-
-var newCard = {
-  name: 'New Test Card',
-  desc: 'This is the description of our new card.',
-  // Place this card at the top of our list
-  idList: myList,
-  pos: 'top'
-};
-
-window.Trello.post('/cards/', newCard, creationSuccess);
+$(document).ready(function(){
+    Trello.authorize({
+        interactive: true,
+        type: "popup",
+        expiration: "never",
+        name: "surveyrequest",
+        persist: "true",
+        success: function() { onAuthorizeSuccessful(); },
+        error: function() { onFailedAuthorization(); },
+        scope: { read: true, write: true},
+    });
+    
+    function onAuthorizeSuccessful() {
+        var token = Trello.token();     
+        today = new Date("December 25, 2015 12:00:00");
+        var thisUrl = encodeURL = "http://www.google.com/";
+        console.log(token);
+        Trello.post("cards", { name: "Card created for test", desc: "this is a test",  idList: "61f1d40a93852c1b9f88152a", due: today, urlSource: thisUrl});
+    
+    }
+    
+    function onFailedAuthorization() {
+        console.log("Authorization failed.");
+    }
+    });
