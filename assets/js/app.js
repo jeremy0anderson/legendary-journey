@@ -23,7 +23,7 @@ var authenticationSuccess = function() {
 
   //POST template
 
-  var myList = 'INSERT YOUR IDLIST HERE';
+var myList = '61f1d40a93852c1b9f88152a';
 
 var creationSuccess = function (data) {
   console.log('Card created successfully.');
