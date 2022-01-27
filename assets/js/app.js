@@ -1,3 +1,5 @@
+//determine what happens once auth is finished
+
 var authenticationSuccess = function() {
     console.log('Successful authentication');
   };
@@ -5,6 +7,8 @@ var authenticationSuccess = function() {
   var authenticationFailure = function() {
     console.log('Failed authentication');
   };
+
+  //authorization and authentication
 
   window.Trello.authorize({
     type: 'popup',
@@ -16,6 +20,8 @@ var authenticationSuccess = function() {
     success: authenticationSuccess,
     error: authenticationFailure
   });
+
+  //POST template
 
   var myList = 'INSERT YOUR IDLIST HERE';
 
