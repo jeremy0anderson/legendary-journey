@@ -56,11 +56,9 @@ const loginButton = document.querySelector('#button-1643251037187');
 //when the login button is clicked, wait for trello key/token verification
 //and return the variable containing the string needed to successfully fetch API requests.
 loginButton.addEventListener('click', async() => {
-  if (Trello.token !== undefined && Trello.token() !== null) {
     await new AuthorizeApp(authorizeOptions);
     authString = new RequestUrlHandler(user.key, user.token).string;
     console.log(authString);
-  }
     return authString;
 });
   //POST template
