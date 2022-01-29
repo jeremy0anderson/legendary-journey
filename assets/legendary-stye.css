@@ -1,8 +1,11 @@
+body{
+    justify-content: center;
+}
 .rendered-form{
     justify-content: center;
     display: flex;
 }
-.btn-default btn{
+.btn{
     margin: 20px;
     padding: 10px;
     border-style: none;
