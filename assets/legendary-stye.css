@@ -1,0 +1,31 @@
+.rendered-form{
+    justify-content: center;
+    display: flex;
+}
+#button-1643251037187{
+    margin: 20px;
+    padding: 10px;
+    border-style: none;
+    border-radius: 20px;
+    background-color: rgba(41,198,79,0.88);
+    color: mintcream;
+}
+label{
+    display: none;
+}
+.form-group{
+    justify-content: inherit;
+    margin: 20px;
+    padding: 15px;
+    display: flex;
+}
+.form-control::placeholder {
+    text-align: center;
+}
+.form-fieldset-container{
+    display: block;
+    border-style: none;
+    justify-content: center;
+}
+
+
