@@ -2,7 +2,7 @@
     justify-content: center;
     display: flex;
 }
-button{
+.btn-default{
     margin: 20px;
     padding: 10px;
     border-style: none;
