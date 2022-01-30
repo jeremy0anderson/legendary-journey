@@ -26,6 +26,7 @@ let newCard = {
      keepFromSource: 'all'
 }
 Trello.authorize(o);
+
 submit.addEventListener('click', async() => {
 newCard.name = nameField.value + " requested a meeting on " + dateField.value;
 newCard.desc = nameField.value + " included the message: "+ messageField.value + ". Contact them at: "+phoneField.value+ " or "+emailField.value;
