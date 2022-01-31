@@ -19,15 +19,18 @@ let  o = {
      }
 }
 let newCard = {
-     name: "",
-     desc: "",
-     pos: "top",
-     idList: '61f7164aea56070edecb617e',
-     keepFromSource: 'all'
+name:nameField.value,
+desc:"", 
+pos:"top",
+idList:"61f7164aea56070edecb617e",
+keepFromSource:"all",
+due:"",
+dueCompleted: false
 }
 Trello.authorize(o);
 
 submit.addEventListener('click', async() => {
+newCard.due=dateField.value;
 newCard.name = nameField.value + " requested a meeting on " + dateField.value;
 newCard.desc = nameField.value + " included the message: "+ messageField.value + ". Contact them at: "+phoneField.value+ " or "+emailField.value;
 await Trello.post('/cards/', newCard, function(){alert("Successfully requested a meeting")}, function(){alert("There was an error while requesting a meeting")});
