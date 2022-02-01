@@ -31,7 +31,7 @@ let requestCard = {
      name:'',
      desc:"",
      pos:"top",
-     idList:"61f89d5125d25c8cde4bce52",
+     idList:"61f9b0ce1884810bef130a6f",
      id: '',
      email: '',
      keepFromSource:"all",
@@ -43,7 +43,7 @@ class Post{
           name: nameField.value,
           desc:"",
           pos:"top",
-          idList:"61f89d5125d25c8cde4bce52",
+          idList:"61f9b0ce1884810bef130a6f",
           id: '',
           email: '',
           keepFromSource:"all",
@@ -59,8 +59,11 @@ class Post{
           card.id = this.pc.id;
           card.idList = this.pc.idList;
           this.nc = card; requestCard = card;
-          localstorage.setItem('request-details', JSON.stringify(card));
+          localStorage.setItem('request-details', JSON.stringify(card));
           localStorage.setItem('request-card-id', card.id);
+          if (localStorage.getItem('trello_token') && localStorage.getItem('request-details')!==null) {
+          return viewRequests.style.display="inline-flex";
+}         else return viewRequests.style.display = "none";
 
      }
      static updateCard = async(card) => {
@@ -126,5 +129,6 @@ submit.addEventListener('click', async()=>{
      await Post.newCard(requestCard);
      localStorage.setItem('name', nameField.value); localStorage.setItem('phone', phoneField.value); localStorage.setItem('email', emailField.value); localStorage.setItem('message', messageField.value); localStorage.setItem('date', dateField.value);
      form.reset();
+     
 });
 
