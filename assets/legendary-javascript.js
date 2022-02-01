@@ -102,6 +102,7 @@ viewRequests.addEventListener('click', function(){
           editFields[i].value = fields[i].value;
      }
      submitEdit.style.display = "none";
+      editName.value = localStorage.getItem('name');
       editPhone.value = localStorage.getItem('phone');
       editEmail.value = localStorage.getItem('email');
       editMessage.value = localStorage.getItem('message');
