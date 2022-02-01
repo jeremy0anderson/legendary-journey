@@ -2,11 +2,11 @@ body{
     justify-content: center;
 }
 .rendered-form{
-    justify-content: center;
-    display: flex;
+    text-align: center;
+    display: block;
 }
-.btn{
-    margin: 20px;
+.btn-default{
+    margin: 10px;
     padding: 10px;
     border-style: none;
     border-radius: 20px;
@@ -16,11 +16,26 @@ body{
 label{
     display: none;
 }
+input{
+    padding: 5px;
+    width: 200px;
+}
+textarea{
+    padding: 10px;
+    width: 200px;
+}
+form{
+    justify-content: space-between;
+    text-align: center;
+}
 .form-group{
-    justify-content: inherit;
-    margin: 20px;
+    justify-content: space-around;
     padding: 15px;
     display: flex;
+}
+.form-control{
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 .form-control::placeholder {
     text-align: center;
@@ -28,7 +43,25 @@ label{
 .form-fieldset-container{
     display: block;
     border-style: none;
-    justify-content: center;
+    justify-content: space-between;
 }
-
-
+.form-container-main{
+}
+#edit-fields-btn-containers{
+    justify-content: space-between;
+    display: flex;
+    margin-top: 10px;
+    padding: 10px;
+}
+.edit-fields {
+    display: block;
+    border-style: none;
+    padding: 10px;
+    margin: 10px;
+}
+.edit-card-input{
+    display: flex;
+}
+.field-button{
+    display: inline-flex;
+}
