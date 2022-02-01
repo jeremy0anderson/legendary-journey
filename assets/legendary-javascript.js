@@ -66,7 +66,7 @@ class Post{
           card.name = editName.value + " requested a meeting on " + editDate.value;
           card.desc = editName.value + " also included the message: "+ editMessage.value + ". Contact them at: "+editPhone.value;
           card.email = editEmail.value;
-          card.id = this.pc.id;
+          card.id = localStorage.getItem('request-card-id');
           this.uc = await Trello.put('/cards/'+JSON.parse(localStorage.getItem('request-details')).id, card, function(){alert('successfully updated request')}, function(){});
           localStorage.setItem('request-details', JSON.stringify(this.uc));
           this.nc=card;
@@ -87,7 +87,8 @@ submitEdit.addEventListener('click', async() => {
      localStorage.setItem('name', editName.value); localStorage.setItem('phone', editPhone.value); localStorage.setItem('email', editEmail.value); localStorage.setItem('message', editMessage.value); localStorage.setItem('date', editDate.value);
      await Post.updateCard(requestCard);
      dialog.open = false;
-     editRequest.style.display = "none";
+     editRequest.style.display = "inline-flex";
+     submitEdit.style.display = "none";
      
 });
 viewRequests.addEventListener('click', function(){
