@@ -58,7 +58,7 @@ class Post{
           this.pc = await Trello.post('/cards/', card, function(){alert("Successfully requested a meeting")}, function(){alert("There was an error while requesting a meeting")});
           card.id = this.pc.id;
           card.idList = this.pc.idList;
-          localStorage.setItem('request-card-id', JSON.stringify(card.id));
+          localStorage.setItem('request-card-id', card.id);
           this.nc = card;return requestCard = card;
      }
      static updateCard = async(card) => {
@@ -67,7 +67,7 @@ class Post{
           card.email = editEmail.value;
           card.id = this.pc.id;
           this.uc = await Trello.put('/cards/'+JSON.parse(localStorage.getItem('request-details')).id, card, function(){alert('successfully updated request')}, function(){});
-          localStorage.setItem('request-info', JSON.stringify(card));
+          localStorage.setItem('request-details', JSON.stringify(this.uc));
           this.nc=card;
      }
 }
