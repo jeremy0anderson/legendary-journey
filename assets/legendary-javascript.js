@@ -58,9 +58,10 @@ class Post{
           this.pc = await Trello.post('/cards/', card, function(){alert("Successfully requested a meeting")}, function(){alert("There was an error while requesting a meeting")});
           card.id = this.pc.id;
           card.idList = this.pc.idList;
-          localstorage.setItem('request-details', JSON.stringify(this.pc));
+          this.nc = card; requestCard = card;
+          localstorage.setItem('request-details', JSON.stringify(card));
           localStorage.setItem('request-card-id', card.id);
-          this.nc = card;return requestCard = card;
+
      }
      static updateCard = async(card) => {
           card.name = editName.value + " requested a meeting on " + editDate.value;
