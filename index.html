@@ -1,43 +1,85 @@
-<html lang="en-US">
+<html lang="en-US" xmlns="http://www.w3.org/1999/html">
 
-    <head>
-      <meta charset="UTF-8">
-      <title>Legendary-Journey</title>
-      <link rel="stylesheet" href="./assets/legendary-stye.css"/>
-    </head>
-          <body>
-               <div class="rendered-form">
-                  <h1 contenteditable="false" id="control-7612822">Get In Touch</h1>
-            </div>
-            <fieldset class="form-fieldset-container">
-              <div class="formbuilder-text form-group field-text-1643251049905">
-                  <label for="text-1643251049905" class="formbuilder-text-label">Name</label>
-                  <input type="text" class="form-control" placeholder="Name" name="text-1643251049905"  id="text-1643251049905">
-              </div>
-              <div class="formbuilder-text form-group field-text-1643251062289">
-                  <label for="text-1643251062289" class="formbuilder-text-label">Phone Number</label>
-                  <input type="text" class="form-control" placeholder="Phone" name="text-1643251062289"  id="text-1643251062289">
-              </div>
-              <div class="formbuilder-text form-group field-text-1643251064078">
-                  <label for="text-1643251064078" class="formbuilder-text-label">Email</label>
-                  <input type="text" class="form-control" placeholder="Email" name="text-1643251064078"  id="text-1643251064078">
-              </div>
-              <div class="formbuilder-text form-group field-text-1643251065818">
-                  <label for="text-1643251065818" class="formbuilder-text-label">Message</label>
-                  <input type="text" class="form-control" placeholder="Message" name="text-1643251065818"  id="text-1643251065818">
-              </div>
-              <div class="formbuilder-date form-group field-date-1643251044760">
-                  <label for="date-1643251044760" class="formbuilder-date-label">Date Field</label>
-                  <input type="date" class="form-control" placeholder="Date" name="date-1643251044760"  id="date-1643251044760">
-              </div>
-              <div class="formbuilder-button form-group field-button-1643251037187">
-                  <button type="button" class="btn-default btn" name="button-1643251037187" id="button-1643251037187">Submit</button>
-              </div>
-          </body>
-    <footer></footer>
-            <!--Trello API script via Client.JS-->
+<head>
+  <meta charset="UTF-8">
+  <title>Legendary-Journey</title>
+  <link rel="stylesheet" href="./assets/css/style.css"/>
+</head>
+<body>
+<div class="rendered-form">
+  <h1 contenteditable="false" id="control-7612822">Get In Touch</h1>
+</div>
+<dialog class="view-meeting-request-dialog" id="view-meeting" open>
+  <form class="edit-request-form" id="edit-request-form">
+    <fieldset class="edit-fields" id="edit-fields">
+      <div class="formbuilder-text form-group">
+        <label for="edit-name" class="formbuilder-text-label" hidden>Name</label>
+          <input disabled class="edit-card-input form-control" id="edit-name" placeholder=""/>
+      </div>
+      <div class="formbuilder-text form-group">
+        <label for="edit-phone" class="formbuilder-text-label" hidden>Phone</label>
+          <input disabled type="text" class="edit-card-input form-control" placeholder="" name="edit-phone"  id="edit-phone"/>
+      </div>
+      <div class="formbuilder-text form-group">
+        <label for="edit-email" class="formbuilder-text-label" hidden>Email</label>
+          <input disabled type="text" class="edit-card-input form-control" placeholder="" name="edit-email"  id="edit-email"/>
+      </div>
+      <div class="formbuilder-text form-group">
+        <label for="edit-message" class="formbuilder-text-label" hidden>Message</label>
+          <input disabled type="text" class="edit-card-input form-control" placeholder="" name="edit-message"  id="edit-message"/>
+      </div>
+      <div class="formbuilder-text form-group">
+        <label for="edit-date" class="formbuilder-text-label" hidden>Date</label>
+          <input disabled type="date" class="edit-card-input form-control" placeholder="" name="edit-date"  id="edit-date"/>
+      </div>
+    </fieldset>
+    <fieldset class="edit-fields" id="edit-fields-btn-containers">
+      <div class="edit-request-button-container field-button">
+        <button formaction="edit" type="button" form="edit-request-form" class="btn-default btn" id="submit-edit-btn">Submit Request</button>
+      </div>
+      <div class="edit-request-button-container field-button">
+        <button formaction="edit" type="button" form="edit-request-form" class="btn-default btn" id="edit-request-btn">Edit Request</button>
+      </div>
+      <div class="edit-request-button-container field-button">
+        <button type="button" form="edit-request-form" class="btn-default btn" id="close-dialog-btn">Close</button>
+      </div>
+    </fieldset>
+  </form>
+</dialog>
+<form class="form-container-main" id="request-form">
+<fieldset class="form-fieldset-container">
+  <div class="formbuilder-text form-group field-text-1643251049905">
+    <label for="text-1643251049905" class="formbuilder-text-label">Name</label>
+    <input type="text" class="form-control" placeholder="Name" name="text-1643251049905"  id="text-1643251049905">
+  </div>
+  <div class="formbuilder-text form-group field-text-1643251062289">
+    <label for="text-1643251062289" class="formbuilder-text-label">Phone Number</label>
+    <input type="text" class="form-control" placeholder="Phone" name="text-1643251062289"  id="text-1643251062289">
+  </div>
+  <div class="formbuilder-text form-group field-text-1643251064078">
+    <label for="text-1643251064078" class="formbuilder-text-label">Email</label>
+    <input type="text" class="form-control" placeholder="Email" name="text-1643251064078"  id="text-1643251064078">
+  </div>
+  <div class="formbuilder-text form-group field-text-1643251065818">
+    <label for="text-1643251065818" class="formbuilder-text-label">Message</label>
+    <textarea inputmode="text" class="form-control" placeholder="Message" name="text-1643251065818"  id="text-1643251065818"></textarea>
+  </div>
+  <div class="formbuilder-date form-group field-date-1643251044760">
+    <label for="date-1643251044760" class="formbuilder-date-label">Date Field</label>
+    <input type="date" class="form-control" placeholder="Date" name="date-1643251044760"  id="date-1643251044760">
+  </div>
+</fieldset>
+  <div class="formbuilder-button form-group field-button">
+    <button type="button" class="btn-default btn" id="view-requests-btn">View Requests</button>
+  </div>
+  <div class="formbuilder-button form-group field-button">
+    <button type="button" class="btn-default btn" name="button-1643251037187" id="button-1643251037187">Submit</button>
+  </div>
+</form>
+</body>
+<!--Trello API script via Client.JS-->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://api.trello.com/1/client.js?key=9b29a8d502634d87326b2d5c1637c8d8"></script>
 <!--Link js file-->
-<script src="assets/legendary-javascript.js"></script>
+<script src="assets/js/index.js"></script>
 </html>
