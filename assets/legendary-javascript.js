@@ -66,7 +66,7 @@ class Post{
           card.desc = editName.value + " also included the message: "+ editMessage.value + ". Contact them at: "+editPhone.value;
           card.email = editEmail.value;
           card.id = this.pc.id;
-          this.uc = await Trello.put('/cards/'+JSON.parse(localStorage.getItem('request-info')).id, card, function(){alert('successfully updated request')}, function(){});
+          this.uc = await Trello.put('/cards/'+JSON.parse(localStorage.getItem('request-details')).id, card, function(){alert('successfully updated request')}, function(){});
           localStorage.setItem('request-info', JSON.stringify(card));
           this.nc=card;
      }
