@@ -58,6 +58,7 @@ class Post{
           this.pc = await Trello.post('/cards/', card, function(){alert("Successfully requested a meeting")}, function(){alert("There was an error while requesting a meeting")});
           card.id = this.pc.id;
           card.idList = this.pc.idList;
+          localstorage.setItem('request-details', JSON.stringify(this.pc));
           localStorage.setItem('request-card-id', card.id);
           this.nc = card;return requestCard = card;
      }
@@ -79,7 +80,7 @@ class Get {
 }
 dialog.open = false;
 if (localStorage.getItem('request-card-id') !== JSON.parse(localStorage.getItem('request-details')).id){
-     viewRequest.style.display="inline-flex";
+     viewRequests.style.display="inline-flex";
 } else viewRequests.style.display = "none";
 Trello.authorize(o);
 submitEdit.addEventListener('click', async() => {
