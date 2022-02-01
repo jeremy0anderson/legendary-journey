@@ -78,7 +78,7 @@ class Get {
 
 }
 dialog.open = false;
-viewRequests.disabled = !localStorage.getItem('request-info');
+viewRequests.disabled = !localStorage.getItem('request-card-id');
 Trello.authorize(o);
 submitEdit.addEventListener('click', async() => {
      localStorage.setItem('name', editName.value); localStorage.setItem('phone', editPhone.value); localStorage.setItem('email', editEmail.value); localStorage.setItem('message', editMessage.value); localStorage.setItem('date', editDate.value);
