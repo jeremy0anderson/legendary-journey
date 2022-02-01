@@ -80,7 +80,7 @@ class Get {
 }
 Trello.authorize(o);
 dialog.open = false;
-if (localStorage.getItem('request-card-id') !== JSON.parse(localStorage.getItem('request-details')).id){
+if (localStorage.getItem('trello_token') && localStorage.getItem('request-details')!==null) {
      viewRequests.style.display="inline-flex";
 } else viewRequests.style.display = "none";
 submitEdit.addEventListener('click', async() => {
