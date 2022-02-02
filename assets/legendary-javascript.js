@@ -12,7 +12,6 @@ let fields = [nameField, phoneField, emailField, messageField, dateField];
 let viewRequests = document.querySelector('#view-requests-btn');
 let submitEdit = document.querySelector('#submit-edit-btn');
 let dialogButtons = document.querySelector('#edit-fields-btn-containers');
-let deleteRequest = document.querySelector("#delete-request-button");
 let form = document.querySelector("#request-form");
 let  o = {
      type: 'popup',
@@ -28,76 +27,206 @@ let  o = {
           console.log('Failed authentication');
      }
 }
-let requestCard = {
-     name:'',
-     desc:"",
-     pos:"top",
-     idList:"61f9b0ce1884810bef130a6f",
-     id: '',
-     email: '',
-     keepFromSource:"all",
-     due:"",
-     dueCompleted: false
-}
-class Post{
-     static nc= {
-          name: nameField.value,
-          desc:"",
-          pos:"top",
-          idList:"61f9b0ce1884810bef130a6f",
-          id: '',
-          email: '',
-          keepFromSource:"all",
-          due:"",
-          dueCompleted: false
+let workspaceCreated = false;
+let boardCreated = false;
+let memberAdded = false;
+let listCreated = false;
+let cardCreated = false;
+class Post {
+       //create a new workspace
+     static newWorkspace = async () => {
+          if (localStorage.getItem('new-workspace') && workspaceCreated === false) {
+               alert('already created');
+               localStorage.setItem('workspace-created', true);
+               return workspaceCreated = true;
+          } else if (!localStorage.getItem('new-workspace') && workspaceCreated === false) {
+               this.organization = {displayName: "Schedule Request Test"}
+               this.newOrg = await Trello.post('/organizations/', this.organization,
+                    async function () {
+                         await localStorage.setItem('workspace-created', true);
+                         return workspaceCreated = true;
+                    },
+                    async function () {
+                         await localStorage.setItem('workspace-created', false);
+                         return workspaceCreated = false;
+                    });
+               if (workspaceCreated) {
+                    localStorage.setItem("new-workspace", JSON.stringify(this.newOrg));
+               } else if (workspaceCreated === false) {
+                    console.log('workspace not created')
+               }
+          }
      }
-     //posts a new schedule request to my Trello in the form of a card, as well as on my calendar in trello.
-     static newCard = async(card) => {
-          // get the filled out form field values and place them into a card object to send to trello.
-          card.due=dateField.value;
-          card.name = nameField.value + " requested a meeting on " + dateField.value;
-          card.desc = nameField.value + " included the message: "+ messageField.value + ". Contact them at: "+phoneField.value;
-          card.email = emailField.value;
-          this.pc = await Trello.post('/cards/', card, function(){alert("Successfully requested a meeting")}, function(){alert("There was an error while requesting a meeting")});
-          card.id = this.pc.id;
-          card.idList = this.pc.idList;
-          this.nc = card; requestCard = card;
-          localStorage.setItem('request-details', JSON.stringify(card));
-          localStorage.setItem('request-card-id', card.id);
-          if (localStorage.getItem('trello_token') && localStorage.getItem('request-details')!==null) {
-          return viewRequests.style.display="inline-flex";
-}         else return viewRequests.style.display = "none";
+     static newBoard = async () => {
+          this.board = {
+               name: "Schedule Requests",
+               defaultLabels: true,
+               defaultLists: true,
+               idOrganization: JSON.parse(localStorage.getItem('new-workspace')).id,
+               prefs_selfJoin: true,
+          };
+          if (workspaceCreated === true) {
+               this.newB = await Trello.post('/boards/', this.board,
+                    async function () {
+                         alert('successfully created board');
+                         await localStorage.setItem('board-created', true);
+                         return boardCreated = true;
+                    },
+                    async function () {
+                         alert('there was an error creating board');
+                         await localStorage.setItem('board-created', false);
+                         return boardCreated = false;
+                    });
+          } else if (workspaceCreated === false) {
+               return;
+          }
+          if (boardCreated === true) {
+               return localStorage.setItem('new-board', JSON.stringify(this.newB))
+          } else if (boardCreated === false) {
+               console.log('board not created')
+          }
+     }
+     static addMemberToBoard = async () => {
+          this.b = JSON.parse(localStorage.getItem('new-board')).id;
+          this.selectOpts = document.querySelector("#meeting-people-options").value;
+          switch (this.selectOpts) {
+               //check the member that was selected by the user in the form, then add that member to the board that was created.
+               case "Jeremy":
+                    this. mA = await Trello.put('/boards/'+this.b+'/members/',{
+                         id: "61ef6ffc84a63f48ffb809be",
+                         type: "normal",
+                         email: "jeremy.danderson@icloud.com"
+                    }, function(){return alert('member added');});
+                    await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
+                    await localStorage.setItem('member-added', true);
+                    return memberAdded = true;
 
+               case "Ilan":
+                    this. mA = await Trello.put('/boards/'+this.b+'/members/',{
+                         id: "",
+                         type: "normal",
+                         email: ""
+                    }, function(){return alert('member added');});
+                    await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
+                    await localStorage.setItem('member-added', true);
+                    return memberAdded = true;
+
+               case "Chelsie":
+                    this. mA = await Trello.put('/boards/'+this.b+'/members/',{
+                         id: "61ef6568b6c5c80e598b9fe8",
+                         type: "normal",
+                         email: ""
+                    }, function(){return alert('member added');});
+                    await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
+                    await localStorage.setItem('member-added', true);
+                    return memberAdded = true;
+               case "Brandon":
+                    this. mA = await Trello.put('/boards/'+this.b+'/members/',{
+                         id: "61ef722e8214360407ecea4d",
+                         type: "normal",
+                         email: ""
+                    }, function(){return alert('member added');});
+                    await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
+                    await localStorage.setItem('member-added', true);
+                    return memberAdded = true;
+               case "Nick":
+                    this. mA = await Trello.put('/boards/'+this.b+'/members/',{
+                         id: "61ef70115e38db2c9f587211",
+                         type: "normal",
+                         email: ""
+                    }, function(){return alert('member added');});
+                    await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
+                    await localStorage.setItem('member-added', true);
+                    return memberAdded = true;
+               default:
+                    break;
+          }
      }
-     //uses the card you pass through to get the ID required to
-     static updateCard = async(card) => {
-          card.name = editName.value + " requested a meeting on " + editDate.value;
-          card.desc = editName.value + " also included the message: "+ editMessage.value + ". Contact them at: "+editPhone.value;
-          card.email = editEmail.value;
-          card.id = localStorage.getItem('request-card-id');
-          this.uc = await Trello.put('/cards/'+JSON.parse(localStorage.getItem('request-details')).id, card, function(){alert('successfully updated request')}, function(){});
-          localStorage.setItem('request-details', JSON.stringify(this.uc));
-          this.nc=card;
+     static newList = async () => {
+          this.list = await Trello.post("/boards/" + JSON.parse(localStorage.getItem('new-board')).id + "/lists/", {name: "Schedule Requests"}, async function(){await localStorage.setItem('list-created', true)}, async function(){await localStorage.setItem('list-created', false)});
+          await localStorage.setItem('list-created', true);
+          await localStorage.setItem('new-list', JSON.stringify(this.list));
+          return listCreated = true;
      }
+     static newCard = async()=>{
+          this.card = {
+               name: nameField.value,
+               desc: messageField.value,
+               pos: "top",
+               idList: JSON.parse(localStorage.getItem('new-list')).id,
+               id: '',
+               keepFromSource: "all",
+               due: dateField.value,
+               dueCompleted: false
+          }
+          this.newC = await Trello.post('/cards/', this.card, async function(){await localStorage.setItem('card-created', true)}, async function(){await localStorage.setItem('card-created',false)});
+          this.card.id=this.newC.id;
+          await localStorage.setItem('new-card', JSON.stringify(this.newC));
+          return cardCreated = true;
+     }
+     //localStorage.setItem('new-board', JSON.stringify(Post.newB));
+     // this.board = {
+     //      name: "Schedule Requests",
+     //      defaultLabels: true,
+     //      defaultLists: true,
+     //      idOrganization: JSON.parse(localStorage.getItem('new-workspace')).id,
+     //      prefs_selfJoin: true,
+     // }
+     // this.newB = await Trello.post('/boards/', this.board,  async function(){
+     // });
+
 }
-class Delete {
-     static cards = async(card) =>{
-          this.dc = await Trello.delete('/cards/'+JSON.parse(localStorage.getItem('request-details')).id)
+class Get {
+     //verify
+     static organizations = async()=>{
+          this.org = await Trello.get('members/me/organizations');
+          for (let i = 0; i < Get.org.length; i++) {
+               console.log(Get.org[i]);
+               if (Get.org[i].displayName.includes("Schedule Requests")){
+                    alert('already have a workspace!');
+                    localStorage.setItem("organization", JSON.stringify(Get.org))
+                    break;
+               } else if (Get.org[i].displayName.includes("Schedule Requests") === false){
+                    await Post.newOrganization();
+               }
+          }
+     }
+     static boards = async() =>{
+          this.b = await Trello.get('members/me/boards');
+          for (let b = 0; b < Get.b.length; b++) {
+               if (Get.b[b].name.includes('Schedule Requests')){
+                    alert('already have board!');
+                    localStorage.setItem('user-boards')
+                    break;
+               } else { await Post.newBoard();
+               }
+          }
+     }
+     static members = async() =>{
+          this.m = await Trello.get('members/61ef6ffc84a63f48ffb809be');
+          if (this.m.responseText === "The requested resource was not found."){
+               await Post.addMemberToBoard();
+          } else {
+               localStorage.setItem('member-added', JSON.stringify(this.m));
+          }
      }
 
+}
+dialog.open = false;
+if (localStorage.getItem('new-workspace') && localStorage.getItem('new-card')){
+     submit.disabled = true;
+     viewRequests.disabled = false;
+     submit.textContent = "Already have a Trello Workspace with: "+localStorage.getItem('user-added-to-workspace');
+} else if (!localStorage.getItem('new-workspace') && !localStorage.getItem('new-card')){
+     submit.disabled = false;
+     viewRequests.disabled = true;
+     submit.textContent = "Submit";
 }
 Trello.authorize(o);
-dialog.open = false;
-if (localStorage.getItem('trello_token') && localStorage.getItem('request-details')!==null) {
-     viewRequests.style.display="inline-flex";
-} else viewRequests.style.display = "none";
 submitEdit.addEventListener('click', async() => {
      localStorage.setItem('name', editName.value); localStorage.setItem('phone', editPhone.value); localStorage.setItem('email', editEmail.value); localStorage.setItem('message', editMessage.value); localStorage.setItem('date', editDate.value);
-     await Post.updateCard(requestCard);
+     await Post.updateCard(Post.nc);
      dialog.open = false;
-     editRequest.style.display = "inline-flex";
-     submitEdit.style.display = "none";
-
 });
 viewRequests.addEventListener('click', function(){
      dialog.open = true;
@@ -105,11 +234,7 @@ viewRequests.addEventListener('click', function(){
           editFields[i].disabled = true;
           editFields[i].value = fields[i].value;
      }
-
-     editRequest.style.display = "inline-flex";
-     deleteRequest.style.display = "none";
      submitEdit.style.display = "none";
-      editName.value = localStorage.getItem('name');
       editPhone.value = localStorage.getItem('phone');
       editEmail.value = localStorage.getItem('email');
       editMessage.value = localStorage.getItem('message');
@@ -119,7 +244,6 @@ closeDialog.addEventListener('click', function(){
      dialog.open = false;
      editRequest.style.display = "inline-flex";
      submitEdit.style.display = "none";
-     deleteRequest.style.display= "none";
 
 });
 editRequest.addEventListener('click', function(){
@@ -132,23 +256,17 @@ editRequest.addEventListener('click', function(){
           editDate.value = localStorage.getItem('date');
           submitEdit.style.display = "inline-flex";
           editRequest.style.display = "none";
-          deleteRequest.style.display = "inline-flex";
      }
 })
 submit.addEventListener('click', async()=>{
-     await Post.newCard(requestCard);
-     localStorage.setItem('name', nameField.value); localStorage.setItem('phone', phoneField.value); localStorage.setItem('email', emailField.value); localStorage.setItem('message', messageField.value); localStorage.setItem('date', dateField.value);
-     form.reset();
+               await Post.newWorkspace();
+               await Post.newBoard();
+               await Post.addMemberToBoard();
+               await Post.newList();
+               await Post.newCard();
+               console.log(workspaceCreated);
+               console.log(boardCreated);
+               localStorage.setItem('user-added-to-workspace', Post.selectOpts);
+               localStorage.setItem('name', nameField.value); localStorage.setItem('phone', phoneField.value); localStorage.setItem('email', emailField.value); localStorage.setItem('message', messageField.value); localStorage.setItem('date', dateField.value);
+               form.reset();
 });
-
-deleteRequest.addEventListener('click', async(card)=> {
-     await Trello.delete('/cards/'+localStorage.getItem('request-card-id'));
-     let storedFields = ['name', 'phone', 'email', 'message', 'date', 'request-card-id', 'request-details', 'request-info'];
-     for (let i = 0; i < storedFields.length; i++) {
-          localStorage.removeItem(storedFields[i]);
-     }
-     dialog.open = false;
-     editRequest.style.visibility = "inline-flex";
-     submitEdit.style.visibility = "none";
-})
-
