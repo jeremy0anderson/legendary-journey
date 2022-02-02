@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Legendary-Journey</title>
-  <link rel="stylesheet" href="./assets/legendary-style.css"/>
+  <link rel="stylesheet" href="./assets/css/style.css"/>
 </head>
 <body>
 <div class="rendered-form">
@@ -43,13 +43,19 @@
       <div class="edit-request-button-container field-button">
         <button type="button" form="edit-request-form" class="btn-default btn" id="close-dialog-btn">Close</button>
       </div>
-      <div class="edit-request-button-container field-button">
-        <button type="button" form="edit-request-form" class="btn-default btn" id="delete-request-button">Delete Request</button>
-      </div>
     </fieldset>
   </form>
 </dialog>
 <form class="form-container-main" id="request-form">
+  <label for="meeting-people-options" style="display: none">Selection</label>
+  <select class="member-select-dropdown" id="meeting-people-options">
+    <option class="schedule-option" id="default" selected >–Select a member to add to your workspace–</option>
+    <option class="schedule-option" id="ilan">Ilan</option>
+    <option class="schedule-option" id="jeremy">Jeremy</option>
+    <option class="schedule-option" id="nick">Nick</option>
+    <option class="schedule-option" id="chelsie">Chelsie</option>
+    <option class="schedule-option" id="brandon">Brandon</option>
+  </select>
 <fieldset class="form-fieldset-container">
   <div class="formbuilder-text form-group field-text-1643251049905">
     <label for="text-1643251049905" class="formbuilder-text-label">Name</label>
@@ -80,9 +86,10 @@
   </div>
 </form>
 </body>
+<script src="https://p.trellocdn.com/embed.min.js"></script>
 <!--Trello API script via Client.JS-->
 <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://api.trello.com/1/client.js?key=9b29a8d502634d87326b2d5c1637c8d8"></script>
 <!--Link js file-->
-<script src="assets/legendary-javascript.js"></script>
+<script src="assets/js/index.js"></script>
 </html>
