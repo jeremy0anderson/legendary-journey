@@ -105,6 +105,7 @@ viewRequests.addEventListener('click', function(){
           editFields[i].disabled = true;
           editFields[i].value = fields[i].value;
      }
+
      editRequest.style.display = "inline-flex";
      deleteRequest.style.display = "none";
      submitEdit.style.display = "none";
@@ -142,14 +143,10 @@ submit.addEventListener('click', async()=>{
 
 deleteRequest.addEventListener('click', async(card)=> {
      await Trello.delete('/cards/'+localStorage.getItem('request-card-id'));
-     localStorage.removeItem('request-card-id');
-     localStorage.removeItem('request-details');
-     localStorage.removeItem('name');
-     localStorage.removeItem('phone');
-     localStorage.removeItem('date');
-     localStorage.removeItem('message');
-     localStorage.removeItem('request-info');
-     localStorage.removeItem('email');
+     let storedFields = ['name', 'phone', 'email', 'message', 'date', 'request-card-id', 'request-details', 'request-info'];
+     for (let i = 0; i < storedFields.length; i++) {
+          localStorage.removeItem(storedFields[i]);
+     }
      dialog.open = false;
      editRequest.style.visibility = "inline-flex";
      submitEdit.style.visibility = "none";
