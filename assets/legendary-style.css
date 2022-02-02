@@ -24,6 +24,10 @@ textarea{
     padding: 10px;
     width: 200px;
 }
+dialog{
+    border-style: none;
+    float: left;
+}
 form{
     justify-content: space-between;
     text-align: center;

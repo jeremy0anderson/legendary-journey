@@ -12,6 +12,7 @@ let fields = [nameField, phoneField, emailField, messageField, dateField];
 let viewRequests = document.querySelector('#view-requests-btn');
 let submitEdit = document.querySelector('#submit-edit-btn');
 let dialogButtons = document.querySelector('#edit-fields-btn-containers');
+let deleteRequest = document.querySelector("#delete-request-button");
 let form = document.querySelector("#request-form");
 let  o = {
      type: 'popup',
@@ -50,7 +51,9 @@ class Post{
           due:"",
           dueCompleted: false
      }
+     //posts a new schedule request to my Trello in the form of a card, as well as on my calendar in trello.
      static newCard = async(card) => {
+          // get the filled out form field values and place them into a card object to send to trello.
           card.due=dateField.value;
           card.name = nameField.value + " requested a meeting on " + dateField.value;
           card.desc = nameField.value + " included the message: "+ messageField.value + ". Contact them at: "+phoneField.value;
@@ -66,6 +69,7 @@ class Post{
 }         else return viewRequests.style.display = "none";
 
      }
+     //uses the card you pass through to get the ID required to
      static updateCard = async(card) => {
           card.name = editName.value + " requested a meeting on " + editDate.value;
           card.desc = editName.value + " also included the message: "+ editMessage.value + ". Contact them at: "+editPhone.value;
@@ -76,9 +80,9 @@ class Post{
           this.nc=card;
      }
 }
-class Get {
-     static cards = async() =>{
-          this.cardInfo = await Trello.cards.get(Post.nc.id);
+class Delete {
+     static cards = async(card) =>{
+          this.dc = await Trello.delete('/cards/'+JSON.parse(localStorage.getItem('request-details')).id)
      }
 
 }
@@ -93,7 +97,7 @@ submitEdit.addEventListener('click', async() => {
      dialog.open = false;
      editRequest.style.display = "inline-flex";
      submitEdit.style.display = "none";
-     
+
 });
 viewRequests.addEventListener('click', function(){
      dialog.open = true;
@@ -101,6 +105,8 @@ viewRequests.addEventListener('click', function(){
           editFields[i].disabled = true;
           editFields[i].value = fields[i].value;
      }
+     editRequest.style.display = "inline-flex";
+     deleteRequest.style.display = "none";
      submitEdit.style.display = "none";
       editName.value = localStorage.getItem('name');
       editPhone.value = localStorage.getItem('phone');
@@ -112,7 +118,8 @@ closeDialog.addEventListener('click', function(){
      dialog.open = false;
      editRequest.style.display = "inline-flex";
      submitEdit.style.display = "none";
-     
+     deleteRequest.style.display= "none";
+
 });
 editRequest.addEventListener('click', function(){
      for (let i = 0; i < editFields.length; i++) {
@@ -124,12 +131,27 @@ editRequest.addEventListener('click', function(){
           editDate.value = localStorage.getItem('date');
           submitEdit.style.display = "inline-flex";
           editRequest.style.display = "none";
+          deleteRequest.style.display = "inline-flex";
      }
 })
 submit.addEventListener('click', async()=>{
      await Post.newCard(requestCard);
      localStorage.setItem('name', nameField.value); localStorage.setItem('phone', phoneField.value); localStorage.setItem('email', emailField.value); localStorage.setItem('message', messageField.value); localStorage.setItem('date', dateField.value);
      form.reset();
-     
 });
+
+deleteRequest.addEventListener('click', async(card)=> {
+     await Trello.delete('/cards/'+localStorage.getItem('request-card-id'));
+     localStorage.removeItem('request-card-id');
+     localStorage.removeItem('request-details');
+     localStorage.removeItem('name');
+     localStorage.removeItem('phone');
+     localStorage.removeItem('date');
+     localStorage.removeItem('message');
+     localStorage.removeItem('request-info');
+     localStorage.removeItem('email');
+     dialog.open = false;
+     editRequest.style.visibility = "inline-flex";
+     submitEdit.style.visibility = "none";
+})
 
