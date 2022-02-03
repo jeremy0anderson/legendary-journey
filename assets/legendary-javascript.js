@@ -105,7 +105,7 @@ class Post {
                     this. mA = await Trello.put('/boards/'+this.b+'/members/',{
                          id: "",
                          type: "normal",
-                         email: ""
+                         email: "ilantimerman@outlook.com"
                     }, function(){return alert('member added');});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
@@ -115,7 +115,7 @@ class Post {
                     this. mA = await Trello.put('/boards/'+this.b+'/members/',{
                          id: "61ef6568b6c5c80e598b9fe8",
                          type: "normal",
-                         email: ""
+                         email: "chelsiesindar@gmail.com"
                     }, function(){return alert('member added');});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
@@ -124,7 +124,7 @@ class Post {
                     this. mA = await Trello.put('/boards/'+this.b+'/members/',{
                          id: "61ef722e8214360407ecea4d",
                          type: "normal",
-                         email: ""
+                         email: "brandonpeterson.006@gmail.com"
                     }, function(){return alert('member added');});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
@@ -133,7 +133,7 @@ class Post {
                     this. mA = await Trello.put('/boards/'+this.b+'/members/',{
                          id: "61ef70115e38db2c9f587211",
                          type: "normal",
-                         email: ""
+                         email: "tatom.tech@gmail.com"
                     }, function(){return alert('member added');});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
