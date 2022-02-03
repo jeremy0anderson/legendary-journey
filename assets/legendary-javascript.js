@@ -97,10 +97,9 @@ class Post {
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
                     return memberAdded = true;
-
                case "Ilan":
                     this. mA = await Trello.put('/boards/'+this.b+'/members/',{
-                         id: "",
+                         id: "5bd35ff0e21f261f75ec12fb",
                          type: "normal",
                          email: "ilantimerman@outlook.com"
                     }, function(){});
@@ -191,6 +190,7 @@ class Get {
           this.b = await Trello.get('members/me/boards');
           for (let b = 0; b < Get.b.length; b++) {
                if (Get.b[b].name.includes('Schedule Requests')){
+
                     localStorage.setItem('user-boards')
                     break;
                } else { await Post.newBoard();
