@@ -36,7 +36,6 @@ class Post {
        //create a new workspace
      static newWorkspace = async () => {
           if (localStorage.getItem('new-workspace') && workspaceCreated === false) {
-               alert('already created');
                localStorage.setItem('workspace-created', true);
                return workspaceCreated = true;
           } else if (!localStorage.getItem('new-workspace') && workspaceCreated === false) {
@@ -68,12 +67,10 @@ class Post {
           if (workspaceCreated === true) {
                this.newB = await Trello.post('/boards/', this.board,
                     async function () {
-                         alert('successfully created board');
                          await localStorage.setItem('board-created', true);
                          return boardCreated = true;
                     },
                     async function () {
-                         alert('there was an error creating board');
                          await localStorage.setItem('board-created', false);
                          return boardCreated = false;
                     });
@@ -96,7 +93,7 @@ class Post {
                          id: "61ef6ffc84a63f48ffb809be",
                          type: "normal",
                          email: "jeremy.danderson@icloud.com"
-                    }, function(){return alert('member added');});
+                    }, function(){});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
                     return memberAdded = true;
@@ -106,7 +103,7 @@ class Post {
                          id: "",
                          type: "normal",
                          email: "ilantimerman@outlook.com"
-                    }, function(){return alert('member added');});
+                    }, function(){});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
                     return memberAdded = true;
@@ -116,7 +113,7 @@ class Post {
                          id: "61ef6568b6c5c80e598b9fe8",
                          type: "normal",
                          email: "chelsiesindar@gmail.com"
-                    }, function(){return alert('member added');});
+                    }, function(){});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
                     return memberAdded = true;
@@ -125,7 +122,7 @@ class Post {
                          id: "61ef722e8214360407ecea4d",
                          type: "normal",
                          email: "brandonpeterson.006@gmail.com"
-                    }, function(){return alert('member added');});
+                    }, function(){});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
                     return memberAdded = true;
@@ -134,7 +131,7 @@ class Post {
                          id: "61ef70115e38db2c9f587211",
                          type: "normal",
                          email: "tatom.tech@gmail.com"
-                    }, function(){return alert('member added');});
+                    }, function(){});
                     await localStorage.setItem('new-member-added', JSON.stringify(this.mA));
                     await localStorage.setItem('member-added', true);
                     return memberAdded = true;
@@ -183,7 +180,6 @@ class Get {
           for (let i = 0; i < Get.org.length; i++) {
                console.log(Get.org[i]);
                if (Get.org[i].displayName.includes("Schedule Requests")){
-                    alert('already have a workspace!');
                     localStorage.setItem("organization", JSON.stringify(Get.org))
                     break;
                } else if (Get.org[i].displayName.includes("Schedule Requests") === false){
@@ -195,7 +191,6 @@ class Get {
           this.b = await Trello.get('members/me/boards');
           for (let b = 0; b < Get.b.length; b++) {
                if (Get.b[b].name.includes('Schedule Requests')){
-                    alert('already have board!');
                     localStorage.setItem('user-boards')
                     break;
                } else { await Post.newBoard();
